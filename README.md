@@ -2,6 +2,8 @@
 
 A simple command line tool to quickly create projects for the [Internet Computer](https://smartcontracts.org/).
 
+<img src="https://github.com/peterpeterparker/create-ic/raw/main/docs/demo.gif" alt="Cli demo" role="presentation" />
+
 ## Usage
 
 > Note that you will need to use npm 6 or higher.

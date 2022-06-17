@@ -1,6 +1,7 @@
 import {ChildProcessWithoutNullStreams, spawn as spawnCommand} from 'child_process';
 import {existsSync, readdirSync} from 'fs';
 import {confirmAndExit} from './prompt.utils';
+import {red} from 'kleur';
 
 export const spawn = ({
   command,
@@ -38,5 +39,6 @@ export const assertEmptyFolder = async (dir: string) => {
     return;
   }
 
-  await confirmAndExit('Directory not empty. Continue?');
+  console.log(`${red('Directory not empty.')}`);
+  process.exit(1);
 };

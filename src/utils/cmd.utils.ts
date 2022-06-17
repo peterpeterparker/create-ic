@@ -1,6 +1,5 @@
 import {ChildProcessWithoutNullStreams, spawn as spawnCommand} from 'child_process';
 import {existsSync, readdirSync} from 'fs';
-import {confirmAndExit} from './prompt.utils';
 import {red} from 'kleur';
 
 export const spawn = ({

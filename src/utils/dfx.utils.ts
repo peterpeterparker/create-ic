@@ -68,7 +68,7 @@ export const promptDfxVersion = async () => {
     return;
   }
 
-  await dfxUpgrade();
+  // await dfxUpgrade();
 };
 
 export const promptDfxCanisterType = async (): Promise<DfxCanisterType> => {
@@ -105,13 +105,5 @@ export const dfxNewProject = async ({
     args: ['new', project, '--type', type, ...(noFrontend ? ['--no-frontend'] : [])]
   });
 
-export const promptDfxNoFrontend = async (): Promise<boolean> => {
-  const {value} = await prompts({
-    type: 'confirm',
-    name: 'value',
-    message: 'Create a backend only project - i.e. no web application (frontend)?',
-    initial: false
-  });
-
-  return value;
-};
+export const promptDfxNoFrontend = async (): Promise<boolean> =>
+  confirm(`Create a backend only project - i.e. no web application (frontend)?`);

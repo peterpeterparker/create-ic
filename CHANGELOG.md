@@ -4,3 +4,4 @@
 
 - `--no-frontend` support
 - exist if target directory not empty - creating a project in a not empty folder is not supported by `dfx`
+- more comprehensive confirm (`yes` and `no`)

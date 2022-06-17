@@ -24,10 +24,12 @@ const onState = (state: PromptState) => {
 export const promptConfirm = async (message: string): Promise<boolean> => {
   const {answer} = await prompts([
     {
-      type: 'confirm',
+      type: 'toggle',
       name: 'answer',
       message,
       initial: false,
+      active: 'yes',
+      inactive: 'no',
       onState
     }
   ]);

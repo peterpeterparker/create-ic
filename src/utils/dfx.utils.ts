@@ -93,8 +93,25 @@ export const promptDfxCanisterType = async (): Promise<DfxCanisterType> => {
 
 export const dfxNewProject = async ({
   project,
-  type
+  type,
+  noFrontend
 }: {
   project: string;
   type: DfxCanisterType;
-}): Promise<number | null> => spawn({command: 'dfx', args: ['new', project, '--type', type]});
+  noFrontend: boolean;
+}): Promise<number | null> =>
+  spawn({
+    command: 'dfx',
+    args: ['new', project, '--type', type, ...(noFrontend ? ['--no-frontend'] : [])]
+  });
+
+export const promptDfxNoFrontend = async (): Promise<boolean> => {
+  const {value} = await prompts({
+    type: 'confirm',
+    name: 'value',
+    message: 'Create a backend only project - i.e. no web application (frontend)?',
+    initial: false
+  });
+
+  return value;
+};

@@ -4,7 +4,7 @@ import {assertEmptyFolder} from './utils/cmd.utils';
 import {
   dfxNewProject,
   promptDfxCanisterType,
-  promptDfxInstall,
+  promptDfxInstall, promptDfxNoFrontend,
   promptDfxVersion
 } from './utils/dfx.utils';
 import {isWindows, osDisclaimer} from './utils/os.utils';
@@ -28,8 +28,9 @@ export const main = async () => {
   await assertEmptyFolder(project);
 
   const type: DfxCanisterType = await promptDfxCanisterType();
+  const noFrontend: boolean = await promptDfxNoFrontend();
 
-  await dfxNewProject({project, type});
+  await dfxNewProject({project, type, noFrontend});
 };
 
 (async () => {

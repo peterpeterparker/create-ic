@@ -6,3 +6,11 @@ interface DfxManifest {
 }
 
 type DfxCanisterType = 'motoko' | 'rust';
+
+interface DfxJson {
+  canisters: Record<string, {
+    type: 'custom' | 'motoko' | 'assets' | 'rust',
+    candid?: string,
+    wasm?: string,
+  }>
+}

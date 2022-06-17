@@ -9,6 +9,8 @@ import {
 } from './utils/dfx.utils';
 import {isWindows, osDisclaimer} from './utils/os.utils';
 import {promptProject} from './utils/project.utils';
+import {addIIToProject, promptIIInstall} from './utils/internet-identity.utils';
+import {nextStepsDisclaimer} from './utils/info.utils';
 
 export const main = async () => {
   console.log(gray(`\ncreate-ic version ${version}`));
@@ -30,7 +32,18 @@ export const main = async () => {
   const type: DfxCanisterType = await promptDfxCanisterType();
   const noFrontend: boolean = await promptDfxNoFrontend();
 
+  const installII: boolean = noFrontend ? false : await promptIIInstall();
+
   await dfxNewProject({project, type, noFrontend});
+
+  if (!installII) {
+    nextStepsDisclaimer({installII, dir: project});
+    return;
+  }
+
+  await addIIToProject(project);
+
+  nextStepsDisclaimer({installII, dir: project});
 };
 
 (async () => {

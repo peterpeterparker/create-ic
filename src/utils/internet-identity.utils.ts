@@ -39,7 +39,13 @@ const updateDfxJson = async (dir: string) => {
       internet_identity: {
         type: 'custom',
         candid: II_CANDID_LOCAL_FILE,
-        wasm: II_WASM_LOCAL_FILE
+        wasm: II_WASM_LOCAL_FILE,
+        remote: {
+          candid: II_CANDID_LOCAL_FILE,
+          id: {
+            ic: 'rdmx6-jaaaa-aaaaa-aaadq-cai'
+          }
+        }
       }
     }
   } as DfxJson;

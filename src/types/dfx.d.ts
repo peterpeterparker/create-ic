@@ -14,6 +14,7 @@ interface DfxJson {
       type: 'custom' | 'motoko' | 'assets' | 'rust';
       candid?: string;
       wasm?: string;
+      build?: string;
       remote?: {
         candid: string;
         id: {

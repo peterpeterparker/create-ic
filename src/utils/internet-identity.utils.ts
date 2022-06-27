@@ -1,29 +1,15 @@
 import {readFile, writeFile} from 'fs/promises';
 import {green} from 'kleur';
-import {downloadFromURL} from './download.utils';
 import {confirm} from './prompt.utils';
 
 export const promptIIInstall = async (): Promise<boolean> =>
-  confirm('Add a local copy of Internet Identity to the project?');
+  confirm('Do you need authentication (Internet Identity)?');
 
 const II_WASM_LOCAL_FILE = 'internet_identity.wasm';
 const II_CANDID_LOCAL_FILE = 'internet_identity.did';
 
-const downloadIIWasm = async (dir: string) => {
-  const buffer: Buffer = await downloadFromURL(
-    `https://github.com/dfinity/internet-identity/releases/latest/download/internet_identity_dev.wasm`
-  );
-
-  await writeFile(`${dir}/${II_WASM_LOCAL_FILE}`, buffer);
-};
-
-const downloadIICandid = async (dir: string) => {
-  const buffer: Buffer = await downloadFromURL(
-    `https://raw.githubusercontent.com/dfinity/internet-identity/main/src/internet_identity/internet_identity.did`
-  );
-
-  await writeFile(`${dir}/${II_CANDID_LOCAL_FILE}`, buffer, 'utf-8');
-};
+const II_LATEST_WASM = `https://github.com/dfinity/internet-identity/releases/latest/download/internet_identity_dev.wasm`;
+const II_LATEST_CANDID = `https://raw.githubusercontent.com/dfinity/internet-identity/main/src/internet_identity/internet_identity.did`;
 
 const updateDfxJson = async (dir: string) => {
   const dfxJsonFilePath: string = `${dir}/dfx.json`;
@@ -31,6 +17,9 @@ const updateDfxJson = async (dir: string) => {
   const dfxJson: DfxJson = JSON.parse(await readFile(dfxJsonFilePath, 'utf-8'));
 
   const {canisters}: DfxJson = dfxJson;
+
+  const testAndDownload = ({url, filename}: {url: string; filename: string}): string =>
+    `test -f ${filename} || curl -sSL ${url} -o ${filename}`;
 
   const dfxJsonWithII: DfxJson = {
     ...dfxJson,
@@ -40,6 +29,10 @@ const updateDfxJson = async (dir: string) => {
         type: 'custom',
         candid: II_CANDID_LOCAL_FILE,
         wasm: II_WASM_LOCAL_FILE,
+        build: `bash -c '${testAndDownload({
+          url: II_LATEST_WASM,
+          filename: II_WASM_LOCAL_FILE
+        })}; ${testAndDownload({url: II_LATEST_CANDID, filename: II_CANDID_LOCAL_FILE})}'`,
         remote: {
           candid: II_CANDID_LOCAL_FILE,
           id: {
@@ -65,8 +58,6 @@ const updateGitIgnore = async (dir: string) => {
 
 export const addIIToProject = async (dir: string) => {
   console.log('Adding Internet Identity...');
-
-  await Promise.all([downloadIIWasm(dir), downloadIICandid(dir)]);
 
   await Promise.all([updateDfxJson(dir), updateGitIgnore(dir)]);
 

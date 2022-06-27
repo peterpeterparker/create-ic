@@ -75,7 +75,7 @@ export const promptDfxVersion = async () => {
     return;
   }
 
-  // await dfxUpgrade();
+  await dfxUpgrade();
 };
 
 export const promptDfxCanisterType = async (): Promise<DfxCanisterType> => {

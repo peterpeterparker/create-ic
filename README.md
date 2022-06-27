@@ -23,9 +23,12 @@ npm init ic myproject
 This [npm](https://docs.npmjs.com/cli/v8/commands/npm-init) initializer is basically a shorthand to [dfx](https://smartcontracts.org/docs/current/references/cli-reference/dfx-parent/) - the command-line interface for managing Internet Computer projects.
 
 1. It first checks if dfx is installed in your environment. If not, it prompts you to install it
-2. If already installed, the script checks if a newer version of dfx is available and prompts you if you want to install it
-3. Request a new project name and what type of canister should be created
-4. Init a new project
+2. If already installed, the script checks if a newer version of dfx is available and prompts you if you want to upgrade
+3. Request a new project name
+4. Ask what kind of project should be initialized - i.e. frontend (web application) + backend or backend only
+5. Let you pick the type of backend canister that should be created (Motoko or Rust)
+6. If a frontend web application should be created, it also asks you if an authentication ([Internet Identity](github.com/dfinity/internet-identity/)) should be added to the project
+7. Initialize the new project
 
 ## Limitation
 

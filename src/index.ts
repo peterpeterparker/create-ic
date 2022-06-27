@@ -2,15 +2,17 @@ import {gray} from 'kleur';
 import {version} from '../package.json';
 import {assertEmptyFolder} from './utils/cmd.utils';
 import {
+  dfxDefaultNullArguments,
   dfxNewProject,
   promptDfxCanisterType,
-  promptDfxInstall, promptDfxNoFrontend,
+  promptDfxInstall,
+  promptDfxNoFrontend,
   promptDfxVersion
 } from './utils/dfx.utils';
+import {nextStepsDisclaimer} from './utils/info.utils';
+import {addIIToProject, promptIIInstall} from './utils/internet-identity.utils';
 import {isWindows, osDisclaimer} from './utils/os.utils';
 import {promptProject} from './utils/project.utils';
-import {addIIToProject, promptIIInstall} from './utils/internet-identity.utils';
-import {nextStepsDisclaimer} from './utils/info.utils';
 
 export const main = async () => {
   console.log(gray(`\ncreate-ic version ${version}`));
@@ -36,14 +38,16 @@ export const main = async () => {
 
   await dfxNewProject({project, type, noFrontend});
 
+  const dfxNullArguments = await dfxDefaultNullArguments();
+
   if (!installII) {
-    nextStepsDisclaimer({installII, dir: project});
+    nextStepsDisclaimer({installII, dir: project, dfxNullArguments});
     return;
   }
 
   await addIIToProject(project);
 
-  nextStepsDisclaimer({installII, dir: project});
+  nextStepsDisclaimer({installII, dir: project, dfxNullArguments});
 };
 
 (async () => {

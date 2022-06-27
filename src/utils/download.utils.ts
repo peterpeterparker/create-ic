@@ -7,7 +7,7 @@ export const downloadDfxManifest = async (): Promise<DfxManifest> => {
   return JSON.parse(decoder.decode(buffer));
 };
 
-function downloadFromURL(url: string): Promise<Buffer> {
+export const downloadFromURL = (url: string): Promise<Buffer> => {
   return new Promise((resolve, reject) => {
     get(url, async (res) => {
       if (res.statusCode !== undefined && [301, 302].includes(res.statusCode)) {

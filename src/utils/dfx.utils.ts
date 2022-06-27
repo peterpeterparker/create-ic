@@ -4,6 +4,8 @@ import {spawn} from './cmd.utils';
 import {downloadDfxManifest} from './download.utils';
 import {confirm, confirmAndExit, NEW_CMD_LINE} from './prompt.utils';
 
+let versionStore: string | undefined = undefined;
+
 const isDfxAvailable = async (): Promise<boolean> => {
   const code = await spawn({
     command: 'command',
@@ -36,13 +38,23 @@ export const promptDfxInstall = async (): Promise<{status: 'available' | 'instal
   return {status: 'installed'};
 };
 
-const dfxVersion = async (): Promise<string> => {
+const fetchVersion = async (): Promise<string> => {
   let version;
   const callback = (output: string) => (version = output.replace('dfx', '').trim());
 
   await spawn({command: 'dfx', args: ['--version'], stdout: callback});
 
   return version;
+};
+
+const dfxVersion = async (): Promise<string> => {
+  if (versionStore !== undefined) {
+    return versionStore;
+  }
+
+  versionStore = await fetchVersion();
+
+  return versionStore;
 };
 
 // v0.10.0 - https://github.com/dfinity/sdk/blob/master/CHANGELOG.adoc#feat-use-null-as-default-value-for-opt-arguments

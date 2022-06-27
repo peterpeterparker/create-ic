@@ -23,4 +23,4 @@ export const downloadFromURL = (url: string): Promise<Buffer> => {
       res.on('error', reject);
     });
   });
-}
+};

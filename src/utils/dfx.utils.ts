@@ -61,8 +61,8 @@ const dfxVersion = async (): Promise<string> => {
 export const dfxDefaultNullArguments = async (): Promise<boolean> => {
   const version = await dfxVersion();
 
-  return version.localeCompare('0.10.0', undefined, { numeric: true, sensitivity: 'base' }) > -1
-}
+  return version.localeCompare('0.10.0', undefined, {numeric: true, sensitivity: 'base'}) > -1;
+};
 
 const dfxUpgrade = async (): Promise<number | null> => spawn({command: 'dfx', args: ['upgrade']});
 
@@ -142,5 +142,4 @@ export const promptDfxNoFrontend = async (): Promise<boolean> => {
   }
 
   return type === 'backend';
-}
-
+};

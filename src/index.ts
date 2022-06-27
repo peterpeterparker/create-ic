@@ -31,8 +31,8 @@ export const main = async () => {
   const project: string = await promptProject();
   await assertEmptyFolder(project);
 
-  const type: DfxCanisterType = await promptDfxCanisterType();
   const noFrontend: boolean = await promptDfxNoFrontend();
+  const type: DfxCanisterType = await promptDfxCanisterType();
 
   const installII: boolean = noFrontend ? false : await promptIIInstall();
 

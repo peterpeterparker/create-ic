@@ -94,7 +94,7 @@ export const promptDfxCanisterType = async (): Promise<DfxCanisterType> => {
   const {type} = await prompts({
     type: 'select',
     name: 'type',
-    message: 'What type of canister should be use in the starter project?',
+    message: 'What type of backend canister?',
     choices: [
       {title: 'Motoko', value: 'motoko'},
       {title: 'Rust', value: 'rust'}
@@ -124,5 +124,23 @@ export const dfxNewProject = async ({
     args: ['new', project, '--type', type, ...(noFrontend ? ['--no-frontend'] : [])]
   });
 
-export const promptDfxNoFrontend = async (): Promise<boolean> =>
-  confirm(`Create a backend only project - i.e. no web application (frontend)?`);
+export const promptDfxNoFrontend = async (): Promise<boolean> => {
+  const {type} = await prompts({
+    type: 'select',
+    name: 'type',
+    message: 'What kind of project?',
+    choices: [
+      {title: 'Frontend (web application) + backend', value: 'frontend'},
+      {title: 'Backend only', value: 'backend'}
+    ],
+    initial: 0
+  });
+
+  // In case of control+c
+  if (type === undefined || type === '') {
+    process.exit(1);
+  }
+
+  return type === 'backend';
+}
+

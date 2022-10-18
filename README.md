@@ -20,6 +20,12 @@ An optional project name can also be passed to the command line:
 npm init ic myproject
 ```
 
+Tips: if you do not get the last version of the cli, provide `@latest` to the command line:
+
+```bash
+npm init ic@latest
+```
+
 ## What does it actually do?
 
 This [npm](https://docs.npmjs.com/cli/v8/commands/npm-init) initializer is basically a shorthand to [dfx](https://smartcontracts.org/docs/current/references/cli-reference/dfx-parent/) - the command-line interface for managing Internet Computer projects.

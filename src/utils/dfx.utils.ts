@@ -77,6 +77,13 @@ export const promptDfxVersion = async () => {
     return;
   }
 
+  const [_latestMajor, latestMinor, _latestPatch] = latest.split('.');
+  const [_localMajor, localMinor, localPatch] = version.split('.');
+
+  if (parseInt(latestMinor) < parseInt(localMinor) && localPatch.toLowerCase().includes('beta')) {
+    return;
+  }
+
   const answer = await confirm(
     `A new version of dfx (v${latest}) was promoted.${NEW_CMD_LINE}Do you want to ${cyan(
       'upgrade'

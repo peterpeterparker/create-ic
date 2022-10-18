@@ -4,9 +4,7 @@ A simple command line tool to quickly create projects for the [Internet Computer
 
 <img src="https://github.com/peterpeterparker/create-ic/raw/main/docs/demo.gif" alt="Cli demo" role="presentation" />
 
-<div align="center" style="display:flex;flex-direction:column;">
-    [![GitHub release](https://img.shields.io/github/release/peterpeterparker/create-ic/all?logo=GitHub&style=flat-square)](https://github.com/peterpeterparker/create-ic/releases/latest)
-</div>
+[![GitHub release](https://img.shields.io/github/release/peterpeterparker/create-ic/all?logo=GitHub&style=flat-square)](https://github.com/peterpeterparker/create-ic/releases/latest)
 
 ## Usage
 

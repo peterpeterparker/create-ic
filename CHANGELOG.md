@@ -1,3 +1,13 @@
+# 0.3.0 (2022-10-18)
+
+### Features
+
+- detect if local `dfx` version is more recent than `latest` version - i.e. a `beta` - and do not prompt for update if so
+
+### Build
+
+- bump development dependencies
+
 # 0.2.0 (2022-06-27)
 
 ### Features

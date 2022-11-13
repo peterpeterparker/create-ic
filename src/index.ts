@@ -13,6 +13,7 @@ import {nextStepsDisclaimer} from './utils/info.utils';
 import {addIIToProject, promptIIInstall} from './utils/internet-identity.utils';
 import {isWindows, osDisclaimer} from './utils/os.utils';
 import {promptProject} from './utils/project.utils';
+import {removeDeclarationsGitIgnore} from "./utils/gitignore.utils";
 
 export const main = async () => {
   console.log(gray(`\ncreate-ic version ${version}`));
@@ -37,6 +38,8 @@ export const main = async () => {
   const installII: boolean = noFrontend ? false : await promptIIInstall();
 
   await dfxNewProject({project, type, noFrontend});
+
+  await removeDeclarationsGitIgnore(project);
 
   const dfxNullArguments = await dfxDefaultNullArguments();
 

@@ -1,15 +1,16 @@
 import {readFile, writeFile} from 'fs/promises';
 import {green} from 'kleur';
+import {
+  II_CANDID_LOCAL_FILE,
+  II_LATEST_CANDID,
+  II_LATEST_WASM,
+  II_WASM_LOCAL_FILE
+} from '../constants/internet-identity.constants';
 import {confirm} from './prompt.utils';
+import {appendIIToGitIgnore} from "./gitignore.utils";
 
 export const promptIIInstall = async (): Promise<boolean> =>
   confirm('Do you need authentication (Internet Identity)?');
-
-const II_WASM_LOCAL_FILE = 'internet_identity.wasm';
-const II_CANDID_LOCAL_FILE = 'internet_identity.did';
-
-const II_LATEST_WASM = `https://github.com/dfinity/internet-identity/releases/latest/download/internet_identity_dev.wasm`;
-const II_LATEST_CANDID = `https://raw.githubusercontent.com/dfinity/internet-identity/main/src/internet_identity/internet_identity.did`;
 
 const updateDfxJson = async (dir: string) => {
   const dfxJsonFilePath: string = `${dir}/dfx.json`;
@@ -46,20 +47,10 @@ const updateDfxJson = async (dir: string) => {
   await writeFile(dfxJsonFilePath, JSON.stringify(dfxJsonWithII, null, 2), 'utf-8');
 };
 
-const updateGitIgnore = async (dir: string) => {
-  const gitIgnoreFilePath: string = `${dir}/.gitignore`;
-
-  const gitIgnore: string = await readFile(gitIgnoreFilePath, 'utf-8');
-
-  const gitIgnoreII: string = `${gitIgnore}\n\n${II_WASM_LOCAL_FILE}\n${II_CANDID_LOCAL_FILE}`;
-
-  await writeFile(gitIgnoreFilePath, gitIgnoreII, 'utf-8');
-};
-
 export const addIIToProject = async (dir: string) => {
   console.log('Adding Internet Identity...');
 
-  await Promise.all([updateDfxJson(dir), updateGitIgnore(dir)]);
+  await Promise.all([updateDfxJson(dir), appendIIToGitIgnore(dir)]);
 
   console.log(`II installed ${green('✔')}\n`);
 };

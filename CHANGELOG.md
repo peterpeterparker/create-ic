@@ -1,3 +1,13 @@
+# 0.4.0 (2022-11-13)
+
+### Features
+
+- remove exclusion of `src/declations` in the generated `.gitignore`
+
+### Build
+
+- bump development dependencies
+
 # 0.3.0 (2022-10-18)
 
 ### Features

@@ -6,8 +6,8 @@ import {
   II_LATEST_WASM,
   II_WASM_LOCAL_FILE
 } from '../constants/internet-identity.constants';
+import {appendIIToGitIgnore} from './gitignore.utils';
 import {confirm} from './prompt.utils';
-import {appendIIToGitIgnore} from "./gitignore.utils";
 
 export const promptIIInstall = async (): Promise<boolean> =>
   confirm('Do you need authentication (Internet Identity)?');

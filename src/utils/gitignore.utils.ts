@@ -1,5 +1,5 @@
 import {readFile, writeFile} from 'fs/promises';
-import {II_CANDID_LOCAL_FILE, II_WASM_LOCAL_FILE} from '../constants/internet-identity.constants';
+import {II_CANDID_FILE, II_WASM_FILE} from '../constants/internet-identity.constants';
 
 const gitIgnoreFilePath = (dir: string): string => `${dir}/.gitignore`;
 
@@ -20,7 +20,7 @@ export const removeDeclarationsGitIgnore = async (dir: string) => {
 export const appendIIToGitIgnore = async (dir: string) => {
   const gitIgnore: string = await readGitIgnore(dir);
 
-  const gitIgnoreII: string = `${gitIgnore}\n\n${II_WASM_LOCAL_FILE}\n${II_CANDID_LOCAL_FILE}`;
+  const gitIgnoreII: string = `${gitIgnore}\n\n${II_WASM_FILE}\n${II_CANDID_FILE}`;
 
   await writeFile(gitIgnoreFilePath(dir), gitIgnoreII, 'utf-8');
 };

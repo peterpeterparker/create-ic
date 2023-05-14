@@ -2,7 +2,6 @@ import {gray} from 'kleur';
 import {version} from '../package.json';
 import {assertEmptyFolder} from './utils/cmd.utils';
 import {
-  dfxDefaultNullArguments,
   dfxNewProject,
   promptDfxCanisterType,
   promptDfxInstall,
@@ -41,16 +40,14 @@ export const main = async () => {
 
   await removeDeclarationsGitIgnore(project);
 
-  const dfxNullArguments = await dfxDefaultNullArguments();
-
   if (!installII) {
-    nextStepsDisclaimer({installII, dir: project, dfxNullArguments});
+    nextStepsDisclaimer({dir: project});
     return;
   }
 
   await addIIToProject(project);
 
-  nextStepsDisclaimer({installII, dir: project, dfxNullArguments});
+  nextStepsDisclaimer({dir: project});
 };
 
 (async () => {

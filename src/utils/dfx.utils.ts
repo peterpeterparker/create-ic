@@ -57,13 +57,6 @@ const dfxVersion = async (): Promise<string> => {
   return versionStore;
 };
 
-// v0.10.0 - https://github.com/dfinity/sdk/blob/master/CHANGELOG.adoc#feat-use-null-as-default-value-for-opt-arguments
-export const dfxDefaultNullArguments = async (): Promise<boolean> => {
-  const version = await dfxVersion();
-
-  return version.localeCompare('0.10.0', undefined, {numeric: true, sensitivity: 'base'}) > -1;
-};
-
 const dfxUpgrade = async (): Promise<number | null> => spawn({command: 'dfx', args: ['upgrade']});
 
 export const promptDfxVersion = async () => {

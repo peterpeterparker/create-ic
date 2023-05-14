@@ -1,10 +1,9 @@
 import {readFile, writeFile} from 'fs/promises';
 import {green} from 'kleur';
 import {
-  II_CANDID_LOCAL_FILE,
+  II_CANDID_FILE,
   II_LATEST_CANDID,
-  II_LATEST_WASM,
-  II_WASM_LOCAL_FILE
+  II_LATEST_WASM
 } from '../constants/internet-identity.constants';
 import {appendIIToGitIgnore} from './gitignore.utils';
 import {confirm} from './prompt.utils';
@@ -19,23 +18,17 @@ const updateDfxJson = async (dir: string) => {
 
   const {canisters}: DfxJson = dfxJson;
 
-  const testAndDownload = ({url, filename}: {url: string; filename: string}): string =>
-    `test -f ${filename} || curl -sSL ${url} -o ${filename}`;
-
   const dfxJsonWithII: DfxJson = {
     ...dfxJson,
     canisters: {
       ...canisters,
       internet_identity: {
         type: 'custom',
-        candid: II_CANDID_LOCAL_FILE,
-        wasm: II_WASM_LOCAL_FILE,
-        build: `bash -c '${testAndDownload({
-          url: II_LATEST_WASM,
-          filename: II_WASM_LOCAL_FILE
-        })}; ${testAndDownload({url: II_LATEST_CANDID, filename: II_CANDID_LOCAL_FILE})}'`,
+        candid: II_LATEST_CANDID,
+        wasm: II_LATEST_WASM,
+        shrink: false,
         remote: {
-          candid: II_CANDID_LOCAL_FILE,
+          candid: II_CANDID_FILE,
           id: {
             ic: 'rdmx6-jaaaa-aaaaa-aaadq-cai'
           }

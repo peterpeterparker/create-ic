@@ -1,7 +1,6 @@
 import {readFile, writeFile} from 'fs/promises';
 import {green} from 'kleur';
 import {
-  II_CANDID_FILE,
   II_LATEST_CANDID,
   II_LATEST_WASM
 } from '../constants/internet-identity.constants';
@@ -28,7 +27,6 @@ const updateDfxJson = async (dir: string) => {
         wasm: II_LATEST_WASM,
         shrink: false,
         remote: {
-          candid: II_CANDID_FILE,
           id: {
             ic: 'rdmx6-jaaaa-aaaaa-aaadq-cai'
           }

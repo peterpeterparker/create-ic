@@ -16,7 +16,6 @@ interface DfxJson {
       wasm?: string;
       build?: string;
       remote?: {
-        candid: string;
         id: {
           ic: string;
         };

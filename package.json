@@ -38,10 +38,8 @@
   "keywords": [
     "zero-configuration",
     "buildtools",
-    "dfx",
     "cli",
     "internet-computer",
-    "internetcomputer",
-    "dfxtools"
+    "internetcomputer"
   ]
 }

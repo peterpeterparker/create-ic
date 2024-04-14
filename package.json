@@ -2,6 +2,7 @@
   "name": "create-ic",
   "version": "0.5.1",
   "description": "Quickly create a new application for the Internet Computer",
+  "type": "module",
   "bin": "dist/index.js",
   "main": "dist/index.js",
   "files": [
@@ -24,14 +25,15 @@
   },
   "homepage": "https://github.com/peterpeterparker/create-ic#readme",
   "dependencies": {
+    "@junobuild/cli-tools": "^0.0.8",
     "prompts": "^2.4.2"
   },
   "devDependencies": {
-    "@types/prompts": "^2.4.4",
-    "esbuild": "^0.17.19",
-    "prettier": "^2.8.8",
-    "prettier-plugin-organize-imports": "^3.2.2",
-    "typescript": "^5.0.4"
+    "@types/prompts": "^2.4.9",
+    "esbuild": "^0.20.2",
+    "prettier": "^3.2.5",
+    "prettier-plugin-organize-imports": "^3.2.4",
+    "typescript": "^5.4.5"
   },
   "keywords": [
     "zero-configuration",

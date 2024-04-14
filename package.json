@@ -1,7 +1,7 @@
 {
   "name": "create-ic",
   "version": "0.5.1",
-  "description": "Quickly create a new application for the Internet Computer",
+  "description": "A simple command line tool for initializing projects with Juno or guiding developers to the Internet Computer documentation",
   "type": "module",
   "bin": "dist/index.js",
   "main": "dist/index.js",
